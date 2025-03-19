@@ -1,0 +1,25 @@
+{
+    "name": "monad-watcher-website",
+    "version": "1.0.0",
+    "description": "A website for monitoring Monad whale transactions.",
+    "main": "index.js",
+    "scripts": {
+      "start": "live-server public",
+      "build": "echo 'No build step required'",
+      "deploy": "vercel --prod"
+    },
+    "keywords": [
+      "monad",
+      "whale",
+      "transactions",
+      "monitoring"
+    ],
+    "author": "Daniele Heis",
+    "license": "MIT",
+    "dependencies": {
+      "@supabase/supabase-js": "^2.0.0"
+    },
+    "devDependencies": {
+      "live-server": "^1.2.1"
+    }
+  }
