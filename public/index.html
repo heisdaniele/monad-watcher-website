@@ -7,7 +7,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Fira Code font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap" />
-  <!-- Update Supabase JS client import -->
+  <!-- Import Supabase JS client -->
   <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
   <style>
     * { font-family: 'Fira Code', monospace; }
@@ -25,28 +25,11 @@
     .animate-fade-in { animation: fadeIn 0.3s ease-out; }
     tr { transition: all 0.3s ease; }
     .blur-bg { backdrop-filter: blur(8px); background-color: rgba(255, 255, 255, 0.1); }
-    /* Updated Terminal Header */
-    .terminal-header {
-      background: linear-gradient(to right, #230053, #4a0f73);
-    }
-    .terminal-bar {
-      height: 20px;
-      display: flex;
-      align-items: center;
-      padding-left: 8px;
-    }
-    .terminal-circle {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      margin-right: 6px;
-    }
-    .stat-card {
-      transition: all 0.3s ease;
-    }
-    .stat-card:hover {
-      transform: translateY(-5px);
-    }
+    .terminal-header { background: linear-gradient(to right, #230053, #4a0f73); }
+    .terminal-bar { height: 20px; display: flex; align-items: center; padding-left: 8px; }
+    .terminal-circle { width: 12px; height: 12px; border-radius: 50%; margin-right: 6px; }
+    .stat-card { transition: all 0.3s ease; }
+    .stat-card:hover { transform: translateY(-5px); }
   </style>
 </head>
 <body class="p-4 min-h-screen">
@@ -57,20 +40,17 @@
       <div class="flex items-center justify-between">
         <div class="flex items-center">
           <div class="bg-white p-2 rounded-full mr-2">
-            <!-- Updated icon color using new primary -->
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#230053]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
           </div>
           <div class="text-xl font-bold text-white">Monad Whale Alert</div>
         </div>
-        <!-- Hamburger for mobile -->
         <button class="sm:hidden p-2 text-white hover:bg-[#1e0049] rounded" onclick="toggleMenu()">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
           </svg>
         </button>
-        <!-- Desktop Menu -->
         <div class="hidden sm:flex items-center space-x-2">
           <button class="bg-white hover:bg-gray-100 text-[#230053] rounded-full px-4 py-1 flex items-center">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -80,7 +60,6 @@
           </button>
         </div>
       </div>
-      <!-- Mobile Menu -->
       <div id="mobileMenu" class="hidden sm:hidden mt-2">
         <button class="bg-white hover:bg-gray-100 text-[#230053] rounded-full px-4 py-1 w-full text-left flex items-center">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -92,17 +71,11 @@
     </header>
     
     <!-- Analytics Dashboard -->
-    <!-- 2 boxes per row on mobile and 4 per row on medium screens -->
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
       <div class="stat-card bg-white rounded-lg p-4 panel">
         <div class="text-sm text-gray-500 mb-1">24h Volume</div>
         <div class="text-2xl font-bold text-[#230053]" id="totalVolume">0 MON</div>
-        <div class="text-xs text-green-500 mt-1 flex items-center" id="volumeChange">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
-          </svg>
-          0%
-        </div>
+        <div class="text-xs text-green-500 mt-1" id="volumeChange">+0%</div>
       </div>
       <div class="stat-card bg-white rounded-lg p-4 panel">
         <div class="text-sm text-gray-500 mb-1">Largest Transfer</div>
@@ -110,26 +83,20 @@
         <div class="text-xs text-gray-500 mt-1" id="largestTimestamp">--</div>
       </div>
       <div class="stat-card bg-white rounded-lg p-4 panel">
-        <div class="text-sm text-gray-500 mb-1">Active Whales</div>
-        <div class="text-2xl font-bold text-[#230053]" id="activeWhales">0</div>
+        <div class="text-sm text-gray-500 mb-1">Active Whale</div>
+        <div class="text-2xl font-bold text-[#230053]" id="activeWhale">N/A</div>
         <div class="text-xs text-gray-500 mt-1">Last 24 hours</div>
       </div>
       <div class="stat-card bg-white rounded-lg p-4 panel">
         <div class="text-sm text-gray-500 mb-1">Total Transactions</div>
         <div class="text-2xl font-bold text-[#230053]" id="txTotal">0</div>
-        <div class="text-xs text-red-500 mt-1 flex items-center" id="txChange">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-          </svg>
-          0%
-        </div>
+        <div class="text-xs text-red-500 mt-1" id="txChange">+0%</div>
       </div>
     </div>
 
-    <!-- Main Content -->
+    <!-- Main Content (Transactions Table) -->
     <div class="grid grid-cols-1 gap-4">
       <div class="panel">
-        <!-- Panel Header -->
         <div class="terminal-header text-white rounded-t-lg">
           <div class="terminal-bar">
             <div class="terminal-circle" style="background-color: #ff5f56"></div>
@@ -138,9 +105,7 @@
             <div class="ml-2 font-bold">WhaleTransactions.exe</div>
           </div>
         </div>
-        <!-- Panel Content -->
         <div class="bg-white rounded-b-lg">
-          <!-- Search Bar -->
           <div class="p-3 bg-gray-100 border-b border-gray-200">
             <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
               <div class="font-bold text-[#230053]">Whale Transactions</div>
@@ -160,7 +125,6 @@
               </div>
             </div>
           </div>
-          <!-- Transaction Table -->
           <div class="overflow-auto max-h-[50vh]">
             <div class="min-w-[800px]">
               <table class="w-full">
@@ -173,12 +137,11 @@
                   </tr>
                 </thead>
                 <tbody id="transactionsTable">
-                  <!-- Transactions will be dynamically inserted here -->
+                  <!-- Real-time transactions will be inserted here -->
                 </tbody>
               </table>
             </div>
           </div>
-          <!-- Table Footer -->
           <div class="p-3 bg-gray-100 border-t border-gray-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 rounded-b-lg">
             <div>
               <span id="txCount" class="font-bold text-[#230053]">0</span> transactions displayed
@@ -203,7 +166,9 @@
         Donate to
       </button>
       <div class="flex items-center gap-2">
-        <div class="bg-gray-100 border border-gray-200 rounded-full p-2 px-4 text-sm">0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D</div>
+        <div class="bg-gray-100 border border-gray-200 rounded-full p-2 px-4 text-sm">
+          0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D
+        </div>
         <button class="bg-gray-100 hover:bg-gray-200 text-[#230053] border border-gray-200 rounded-full p-2" onclick="copyToClipboard('0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D')" title="Copy to clipboard">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
@@ -218,61 +183,20 @@
     </footer>
   </div>
 
-  <!-- Supabase and custom JS code -->
+  <!-- Supabase and Custom JS Code -->
   <script>
+    // Supabase configuration (replace with your keys)
     const SUPABASE_URL = "https://pszbjeordtuypgmfglqb.supabase.co";
     const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBzemJqZW9yZHR1eXBnbWZnbHFiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDIyOTczNTgsImV4cCI6MjA1Nzg3MzM1OH0.5pDR2Q98mrmPlIhRdHYEgz94mU7436vwo8gSh_zIf-M";
     const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-    async function testConnection() {
-      try {
-        const { data, error } = await supabase.from('transfers').select('count').single();
-        if (error) throw error;
-        console.log('Connected to Supabase:', data);
-      } catch (error) {
-        console.error('Supabase connection error:', error);
-      }
-    }
-    testConnection();
-
-    async function testAPI() {
-      const startTime = performance.now();
-      try {
-        const response = await fetch('https://pszbjeordtuypgmfglqb.supabase.co/rest/v1/transfers?select=*&limit=5', {
-          headers: {
-            'apikey': SUPABASE_ANON_KEY,
-            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-            'Content-Type': 'application/json'
-          }
-        });
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data = await response.json();
-        const endTime = performance.now();
-        console.log('API Test Results:', {
-          status: response.status,
-          responseTime: `${(endTime - startTime).toFixed(2)}ms`,
-          recordCount: data.length,
-          sampleRecord: data[0],
-          headers: Object.fromEntries(response.headers)
-        });
-        return data;
-      } catch (error) {
-        console.error('API Test Error:', {
-          message: error.message,
-          stack: error.stack
-        });
-        throw error;
-      }
-    }
-    testAPI();
-
+    // Helper function to truncate addresses
     function truncateAddress(address) {
       if (!address) return '';
       return address.length > 10 ? address.substring(0, 6) + '...' + address.substring(address.length - 4) : address;
     }
     
+    // Clipboard copy function
     function copyToClipboard(text) {
       navigator.clipboard.writeText(text).then(() => {
         const toast = document.createElement('div');
@@ -287,6 +211,88 @@
       }).catch(err => console.error('Copy failed:', err));
     }
     
+    // Function to update analytics by querying Supabase with additional queries
+    async function updateAnalytics() {
+      try {
+        const now = new Date();
+        const dayAgo = new Date(now.getTime() - 24 * 60 * 60 * 1000).toISOString();
+        const threeHoursAgo = new Date(now.getTime() - 3 * 60 * 60 * 1000).toISOString();
+        
+        // Query all transfers in the last 24 hours
+        const { data: transfers24, count: txCount, error: error24 } = await supabase
+          .from('transfers')
+          .select('*', { count: 'exact' })
+          .gte('created_at', dayAgo);
+        if (error24) throw error24;
+        
+        let totalVolume = 0;
+        const senderCounts = {};
+        if (transfers24) {
+          transfers24.forEach(tx => {
+            totalVolume += parseFloat(tx.amount);
+            senderCounts[tx.from_addr] = (senderCounts[tx.from_addr] || 0) + 1;
+          });
+        }
+        
+        // Determine the most active wallet (sender with highest count)
+        let mostActiveWallet = '';
+        let mostActiveCount = 0;
+        for (const [wallet, count] of Object.entries(senderCounts)) {
+          if (count > mostActiveCount) {
+            mostActiveCount = count;
+            mostActiveWallet = wallet;
+          }
+        }
+        
+        // Query the largest transfer in the last 3 hours
+        const { data: largestTransferData, error: errorLargest } = await supabase
+          .from('transfers')
+          .select('*')
+          .gte('created_at', threeHoursAgo)
+          .order('amount', { ascending: false })
+          .limit(1);
+        if (errorLargest) throw errorLargest;
+        const largestTransfer = largestTransferData && largestTransferData.length > 0 ? largestTransferData[0].amount : 0;
+        const largestTimestamp = largestTransferData && largestTransferData.length > 0 ? largestTransferData[0].created_at : '--';
+        
+        // Update DOM elements for analytics cards
+        document.getElementById('totalVolume').textContent = `${totalVolume.toLocaleString()} MON`;
+        // For percentage changes, you might add additional logic or state
+        document.getElementById('volumeChange').innerHTML = `+0%`;
+        document.getElementById('largestTransfer').textContent = `${parseFloat(largestTransfer).toLocaleString()} MON`;
+        document.getElementById('largestTimestamp').textContent = largestTimestamp;
+        document.getElementById('activeWhale').textContent = mostActiveWallet ? truncateAddress(mostActiveWallet) : 'N/A';
+        document.getElementById('txTotal').textContent = txCount || 0;
+        document.getElementById('txChange').innerHTML = `+0%`;
+      } catch (err) {
+        console.error("Error updating analytics:", err);
+      }
+    }
+    
+    // Function to fetch the most recent transactions for the table
+    async function fetchTransactions() {
+      try {
+        const { data, error } = await supabase
+          .from("transfers")
+          .select("*")
+          .order("created_at", { ascending: false })
+          .limit(8);
+        if (error) throw error;
+        const tbody = document.getElementById("transactionsTable");
+        tbody.innerHTML = ""; // Clear existing rows
+        if (data && data.length > 0) {
+          // Reverse to display oldest first in the table
+          data.reverse().forEach(tx => renderTransaction(tx));
+          console.log('Fetched transactions:', data);
+        } else {
+          console.log('No transactions found');
+        }
+      } catch (err) {
+        console.error("Error fetching transactions:", err);
+      }
+    }
+    
+    // Function to render a transaction row in the table
     function renderTransaction(tx) {
       const tbody = document.getElementById("transactionsTable");
       const tr = document.createElement("tr");
@@ -323,75 +329,24 @@
       `;
       
       tbody.insertBefore(tr, tbody.firstChild);
-      
       if (tbody.children.length > 8) {
         tbody.removeChild(tbody.lastChild);
       }
-      
       document.getElementById('txCount').textContent = tbody.children.length;
     }
     
-    function updateAnalytics(data) {
-      document.getElementById('totalVolume').textContent = "13,542.61 MON";
-      document.getElementById('volumeChange').innerHTML = `
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
-        </svg>
-        +12.4%
-      `;
-      
-      document.getElementById('largestTransfer').textContent = "1,503.27 MON";
-      document.getElementById('largestTimestamp').textContent = "3 hours ago";
-      
-      document.getElementById('activeWhales').textContent = "17";
-      
-      document.getElementById('txTotal').textContent = "342";
-      document.getElementById('txChange').innerHTML = `
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
-        </svg>
-        +8.2%
-      `;
-    }
-    
-    async function fetchTransactions() {
-      try {
-        const { data, error } = await supabase.from("transfers").select("*").order("created_at", { ascending: false }).limit(8);
-        if (error) throw error;
-        if (data && data.length > 0) {
-          data.reverse().forEach(renderTransaction);
-          updateAnalytics(data);
-          console.log('Fetched transactions:', data);
-        } else {
-          console.log('No transactions found');
-        }
-      } catch (err) {
-        console.error("Error fetching transactions:", err);
-      }
-    }
-    
-    function subscribeRealtime() {
-      console.log('Setting up realtime subscription...');
-      const subscription = supabase.from("transfers").on("INSERT", payload => {
-        console.log("New transaction received:", payload);
-        renderTransaction(payload.new);
-      }).subscribe((status) => {
-        console.log('Subscription status:', status);
-      });
-      if (subscription) {
-        console.log('Subscription established');
-      } else {
-        console.error('Failed to establish subscription');
-      }
-    }
-    
-    setInterval(() => { fetchTransactions(); }, 10000);
+    // Periodically fetch transactions and update analytics
+    setInterval(() => {
+      fetchTransactions();
+      updateAnalytics();
+    }, 10000); // Every 10 seconds
     
     document.addEventListener("DOMContentLoaded", () => {
       fetchTransactions();
-      subscribeRealtime();
+      updateAnalytics();
     });
     
+    // Search functionality
     const searchInput = document.querySelector('input[type="search"]');
     searchInput.addEventListener("input", (e) => {
       const query = e.target.value.toLowerCase();
@@ -400,14 +355,13 @@
       });
     });
     
+    // Mobile menu toggle
     let menuOpen = false;
     function toggleMenu() {
       menuOpen = !menuOpen;
       const menu = document.getElementById("mobileMenu");
       menu.classList.toggle("hidden", !menuOpen);
     }
-    
-    document.getElementById("refreshButton").addEventListener("click", () => { fetchTransactions(); });
   </script>
 </body>
 </html>
