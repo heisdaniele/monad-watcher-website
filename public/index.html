@@ -24,7 +24,6 @@
     }
     .animate-fade-in { animation: fadeIn 0.3s ease-out; }
     tr { transition: all 0.3s ease; }
-    .blur-bg { backdrop-filter: blur(8px); background-color: rgba(255, 255, 255, 0.1); }
     .terminal-header { background: linear-gradient(to right, #230053, #4a0f73); }
     .terminal-bar { height: 20px; display: flex; align-items: center; padding-left: 8px; }
     .terminal-circle { width: 12px; height: 12px; border-radius: 50%; margin-right: 6px; }
@@ -78,17 +77,17 @@
         <div class="text-xs text-green-500 mt-1" id="volumeChange">+0%</div>
       </div>
       <div class="stat-card bg-white rounded-lg p-4 panel">
-        <div class="text-sm text-gray-500 mb-1">Largest Transfer</div>
+        <div class="text-sm text-gray-500 mb-1">Largest Transfer (3h)</div>
         <div class="text-2xl font-bold text-[#230053]" id="largestTransfer">0 MON</div>
         <div class="text-xs text-gray-500 mt-1" id="largestTimestamp">--</div>
       </div>
       <div class="stat-card bg-white rounded-lg p-4 panel">
-        <div class="text-sm text-gray-500 mb-1">Active Whale</div>
-        <div class="text-2xl font-bold text-[#230053]" id="activeWhale">N/A</div>
-        <div class="text-xs text-gray-500 mt-1">Last 24 hours</div>
+        <div class="text-sm text-gray-500 mb-1">Active Whale(s)</div>
+        <div class="text-2xl font-bold text-[#230053]" id="activeWhale">0</div>
+        <div class="text-xs text-gray-500 mt-1">Wallets with ≥2 tx (24h)</div>
       </div>
       <div class="stat-card bg-white rounded-lg p-4 panel">
-        <div class="text-sm text-gray-500 mb-1">Total Transactions</div>
+        <div class="text-sm text-gray-500 mb-1">24h Total Transactions</div>
         <div class="text-2xl font-bold text-[#230053]" id="txTotal">0</div>
         <div class="text-xs text-red-500 mt-1" id="txChange">+0%</div>
       </div>
@@ -156,27 +155,26 @@
         </div>
       </div>
     </div>
+    
     <!-- Donation Section -->
-<div class="flex flex-col sm:flex-row justify-center items-center gap-3 mt-4 bg-white p-3 rounded-lg panel">
-  <button class="bg-[#230053] hover:bg-[#1e0049] text-white rounded-full px-4 py-2 flex items-center">
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-    </svg>
-    Donate to
-  </button>
-  <div class="flex items-center gap-2">
-    <!-- Added "break-all" so the long address wraps on smaller screens -->
-    <div class="bg-gray-100 border border-gray-200 rounded-full p-2 px-4 text-sm break-all">
-      0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D
+    <div class="flex flex-col sm:flex-row justify-center items-center gap-3 mt-4 bg-white p-3 rounded-lg panel">
+      <button class="bg-[#230053] hover:bg-[#1e0049] text-white rounded-full px-4 py-2 flex items-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        Donate to
+      </button>
+      <div class="flex items-center gap-2">
+        <div class="bg-gray-100 border border-gray-200 rounded-full p-2 px-4 text-sm break-all">
+          0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D
+        </div>
+        <button class="bg-gray-100 hover:bg-gray-200 text-[#230053] border border-gray-200 rounded-full p-2" onclick="copyToClipboard('0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D')" title="Copy to clipboard">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+          </svg>
+        </button>
+      </div>
     </div>
-    <button class="bg-gray-100 hover:bg-gray-200 text-[#230053] border border-gray-200 rounded-full p-2" onclick="copyToClipboard('0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D')" title="Copy to clipboard">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
-      </svg>
-    </button>
-  </div>
-</div>
-
     
     <!-- Footer -->
     <footer class="mt-6 text-center text-white text-sm">
@@ -186,11 +184,10 @@
 
   <!-- Supabase and Custom JS Code -->
   <script>
-    // Supabase configuration (replace with your keys)
     const SUPABASE_URL = "https://pszbjeordtuypgmfglqb.supabase.co";
     const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBzemJqZW9yZHR1eXBnbWZnbHFiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDIyOTczNTgsImV4cCI6MjA1Nzg3MzM1OH0.5pDR2Q98mrmPlIhRdHYEgz94mU7436vwo8gSh_zIf-M";
     const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
+  
     // Helper function to truncate addresses
     function truncateAddress(address) {
       if (!address) return '';
@@ -212,65 +209,75 @@
       }).catch(err => console.error('Copy failed:', err));
     }
     
-    // Function to update analytics by querying Supabase with additional queries
+    // Function to update analytics based on historical data
     async function updateAnalytics() {
       try {
         const now = new Date();
         const dayAgo = new Date(now.getTime() - 24 * 60 * 60 * 1000).toISOString();
-        const threeHoursAgo = new Date(now.getTime() - 3 * 60 * 60 * 1000).toISOString();
-        
-        // Query all transfers in the last 24 hours
-        const { data: transfers24, count: txCount, error: error24 } = await supabase
+        const prevDayAgo = new Date(now.getTime() - 48 * 60 * 60 * 1000).toISOString();
+  
+        // Query current 24h transfers (for volume and transaction count)
+        const { data: currentData, count: currentCount, error: currentError } = await supabase
           .from('transfers')
-          .select('*', { count: 'exact' })
+          .select('amount, from_addr', { count: 'exact' })
           .gte('created_at', dayAgo);
-        if (error24) throw error24;
-        
-        let totalVolume = 0;
-        const senderCounts = {};
-        if (transfers24) {
-          transfers24.forEach(tx => {
-            totalVolume += parseFloat(tx.amount);
-            senderCounts[tx.from_addr] = (senderCounts[tx.from_addr] || 0) + 1;
+        if (currentError) throw currentError;
+  
+        let currentVolume = 0;
+        let senderCounts = {};
+        if (currentData) {
+          currentData.forEach(tx => {
+            currentVolume += parseFloat(tx.amount);
+            const sender = tx.from_addr;
+            senderCounts[sender] = (senderCounts[sender] || 0) + 1;
           });
         }
-        
-        // Determine the most active wallet (sender with highest count)
-        let mostActiveWallet = '';
-        let mostActiveCount = 0;
-        for (const [wallet, count] of Object.entries(senderCounts)) {
-          if (count > mostActiveCount) {
-            mostActiveCount = count;
-            mostActiveWallet = wallet;
-          }
-        }
-        
-        // Query the largest transfer in the last 3 hours
-        const { data: largestTransferData, error: errorLargest } = await supabase
+  
+        // Query previous 24h transfers (for comparison)
+        const { data: previousData, count: previousCount, error: previousError } = await supabase
           .from('transfers')
-          .select('*')
-          .gte('created_at', threeHoursAgo)
-          .order('amount', { ascending: false })
-          .limit(1);
-        if (errorLargest) throw errorLargest;
-        const largestTransfer = largestTransferData && largestTransferData.length > 0 ? largestTransferData[0].amount : 0;
-        const largestTimestamp = largestTransferData && largestTransferData.length > 0 ? largestTransferData[0].created_at : '--';
-        
-        // Update DOM elements for analytics cards
-        document.getElementById('totalVolume').textContent = `${totalVolume.toLocaleString()} MON`;
-        // For percentage changes, you might add additional logic or state
-        document.getElementById('volumeChange').innerHTML = `+0%`;
-        document.getElementById('largestTransfer').textContent = `${parseFloat(largestTransfer).toLocaleString()} MON`;
-        document.getElementById('largestTimestamp').textContent = largestTimestamp;
-        document.getElementById('activeWhale').textContent = mostActiveWallet ? truncateAddress(mostActiveWallet) : 'N/A';
-        document.getElementById('txTotal').textContent = txCount || 0;
-        document.getElementById('txChange').innerHTML = `+0%`;
+          .select('amount', { count: 'exact' })
+          .gte('created_at', prevDayAgo)
+          .lt('created_at', dayAgo);
+        if (previousError) throw previousError;
+  
+        let previousVolume = 0;
+        if (previousData) {
+          previousData.forEach(tx => {
+            previousVolume += parseFloat(tx.amount);
+          });
+        }
+  
+        // Calculate percentage change for volume
+        const volumeChangePercent = previousVolume > 0 
+          ? (((currentVolume - previousVolume) / previousVolume) * 100).toFixed(2)
+          : "0.00";
+  
+        // Total transaction counts for current and previous 24h periods
+        const txCountCurrent = currentCount || 0;
+        const txCountPrevious = previousCount || 0;
+        const txChangePercent = txCountPrevious > 0 
+          ? (((txCountCurrent - txCountPrevious) / txCountPrevious) * 100).toFixed(2)
+          : "0.00";
+  
+        // Calculate Active Whales: count of unique sender addresses with ≥2 transactions in current 24h
+        let activeWhaleCount = 0;
+        for (const sender in senderCounts) {
+          if (senderCounts[sender] >= 2) activeWhaleCount++;
+        }
+  
+        // Update the DOM elements for analytics cards
+        document.getElementById('totalVolume').textContent = `${currentVolume.toLocaleString()} MON`;
+        document.getElementById('volumeChange').textContent = `${volumeChangePercent > 0 ? '+' : ''}${volumeChangePercent}%`;
+        document.getElementById('txTotal').textContent = `${txCountCurrent}`;
+        document.getElementById('txChange').textContent = `${txChangePercent > 0 ? '+' : ''}${txChangePercent}%`;
+        document.getElementById('activeWhale').textContent = activeWhaleCount;
       } catch (err) {
         console.error("Error updating analytics:", err);
       }
     }
     
-    // Function to fetch the most recent transactions for the table
+    // Function to fetch recent transactions for the table
     async function fetchTransactions() {
       try {
         const { data, error } = await supabase
@@ -280,9 +287,9 @@
           .limit(8);
         if (error) throw error;
         const tbody = document.getElementById("transactionsTable");
-        tbody.innerHTML = ""; // Clear existing rows
+        tbody.innerHTML = "";
         if (data && data.length > 0) {
-          // Reverse to display oldest first in the table
+          // Reverse to display oldest first
           data.reverse().forEach(tx => renderTransaction(tx));
           console.log('Fetched transactions:', data);
         } else {
@@ -336,18 +343,18 @@
       document.getElementById('txCount').textContent = tbody.children.length;
     }
     
-    // Periodically fetch transactions and update analytics
+    // Periodically fetch transactions and update analytics every 10 seconds.
     setInterval(() => {
       fetchTransactions();
       updateAnalytics();
-    }, 10000); // Every 10 seconds
+    }, 10000);
     
     document.addEventListener("DOMContentLoaded", () => {
       fetchTransactions();
       updateAnalytics();
     });
     
-    // Search functionality
+    // Search functionality for filtering transactions.
     const searchInput = document.querySelector('input[type="search"]');
     searchInput.addEventListener("input", (e) => {
       const query = e.target.value.toLowerCase();
@@ -356,13 +363,19 @@
       });
     });
     
-    // Mobile menu toggle
+    // Mobile menu toggle.
     let menuOpen = false;
     function toggleMenu() {
       menuOpen = !menuOpen;
       const menu = document.getElementById("mobileMenu");
       menu.classList.toggle("hidden", !menuOpen);
     }
+    
+    // Refresh button event.
+    document.getElementById("refreshButton").addEventListener("click", () => {
+      fetchTransactions();
+      updateAnalytics();
+    });
   </script>
 </body>
 </html>
