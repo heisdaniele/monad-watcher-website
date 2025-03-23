@@ -8,12 +8,12 @@
   <!-- Archivo font -->
   <link
     rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=JetBrains Mono:wght@400;500;600;700&display=swap"
   />
   <!-- Import Supabase JS client -->
   <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
   <style>
-    * { font-family: 'Archivo', sans-serif; }
+    * { font-family: 'JetBrains Mono', sans-serif; }
     body {
       background-color: #230053;
       background-image: linear-gradient(135deg, #230053 0%, #7B6698 100%);
@@ -43,26 +43,8 @@
     <header class="mb-4">
       <div class="flex items-center justify-between">
         <div class="flex items-center">
-          <div class="bg-white p-2 rounded-full mr-2">
-            <!-- Icon -->
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-6 w-6 text-[#230053]"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2
-                   m0-8c1.11 0 2.08.402 2.599 1
-                   M12 8V7m0 1v8m0 0v1m0-1
-                   c-1.11 0-2.08-.402-2.599-1
-                   M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
+          <div class= >
+           
           </div>
           <div class="text-xl font-bold text-white">Monad Whale Alert</div>
         </div>
@@ -178,7 +160,7 @@
         >
           0
         </div>
-        <div class="text-xs text-gray-500 mt-1">Wallets with ≥2 tx (24h)</div>
+        <div class="text-xs text-gray-500 mt-1">Wallets with ≥3 tx (24h)</div>
       </div>
       <!-- 24h Total Transactions -->
       <div class="stat-card bg-white rounded-lg p-4 panel">
@@ -505,10 +487,10 @@
           largestTimestamp = largestData[0].created_at; // raw ISO date
         }
 
-        // 4) Active Whales: # of unique addresses with ≥2 tx in the current 24h
+        // 4) Active Whales: # of unique addresses with ≥3 tx in the current 24h
         let activeWhaleCount = 0;
         Object.keys(senderCounts).forEach((addr) => {
-          if (senderCounts[addr] >= 4) activeWhaleCount++;
+          if (senderCounts[addr] >= 3) activeWhaleCount++;
         });
 
         // 5) Percentage changes
