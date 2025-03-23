@@ -2,15 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Monad Whale Alert</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Fira Code font -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap" />
+  <!-- Archivo font -->
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&display=swap"
+  />
   <!-- Import Supabase JS client -->
   <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
   <style>
-    * { font-family: 'Fira Code', monospace; }
+    * { font-family: 'Archivo', sans-serif; }
     body {
       background-color: #230053;
       background-image: linear-gradient(135deg, #230053 0%, #7B6698 100%);
@@ -20,11 +23,13 @@
     .panel { box-shadow: 0 4px 6px rgba(0,0,0,0.1), 0 1px 3px rgba(0,0,0,0.08); }
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
+      to   { opacity: 1; transform: translateY(0); }
     }
     .animate-fade-in { animation: fadeIn 0.3s ease-out; }
     tr { transition: all 0.3s ease; }
-    .terminal-header { background: linear-gradient(to right, #230053, #4a0f73); }
+    .terminal-header {
+      background: linear-gradient(to right, #230053, #4a0f73);
+    }
     .terminal-bar { height: 20px; display: flex; align-items: center; padding-left: 8px; }
     .terminal-circle { width: 12px; height: 12px; border-radius: 50%; margin-right: 6px; }
     .stat-card { transition: all 0.3s ease; }
@@ -39,57 +44,153 @@
       <div class="flex items-center justify-between">
         <div class="flex items-center">
           <div class="bg-white p-2 rounded-full mr-2">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#230053]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            <!-- Icon -->
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6 text-[#230053]"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2
+                   m0-8c1.11 0 2.08.402 2.599 1
+                   M12 8V7m0 1v8m0 0v1m0-1
+                   c-1.11 0-2.08-.402-2.599-1
+                   M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
             </svg>
           </div>
           <div class="text-xl font-bold text-white">Monad Whale Alert</div>
         </div>
-        <button class="sm:hidden p-2 text-white hover:bg-[#1e0049] rounded" onclick="toggleMenu()">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        <!-- Mobile Toggle -->
+        <button
+          class="sm:hidden p-2 text-white hover:bg-[#1e0049] rounded"
+          onclick="toggleMenu()"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"
+            />
           </svg>
         </button>
+        <!-- Desktop Menu -->
         <div class="hidden sm:flex items-center space-x-2">
-          <button class="bg-white hover:bg-gray-100 text-[#230053] rounded-full px-4 py-1 flex items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+          <button
+            class="bg-white hover:bg-gray-100 text-[#230053] rounded-full px-4 py-1 flex items-center"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-4 w-4 mr-1"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8
+                   M5 19h14a2 2 0 002-2V7a2 2 0
+                   00-2-2H5a2 2 0 00-2 2v10a2
+                   2 0 002 2z"
+              />
             </svg>
             Contact Us
           </button>
         </div>
       </div>
+      <!-- Mobile Menu -->
       <div id="mobileMenu" class="hidden sm:hidden mt-2">
-        <button class="bg-white hover:bg-gray-100 text-[#230053] rounded-full px-4 py-1 w-full text-left flex items-center">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+        <button
+          class="bg-white hover:bg-gray-100 text-[#230053] rounded-full px-4 py-1 w-full text-left flex items-center"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-4 w-4 mr-1"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8
+                 M5 19h14a2 2 0 002-2V7a2 2 0
+                 00-2-2H5a2 2 0 00-2 2v10a2
+                 2 0 002 2z"
+            />
           </svg>
           Contact Us
         </button>
       </div>
     </header>
-    
+
     <!-- Analytics Dashboard -->
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
+      <!-- 24h Volume -->
       <div class="stat-card bg-white rounded-lg p-4 panel">
         <div class="text-sm text-gray-500 mb-1">24h Volume</div>
-        <div class="text-2xl font-bold text-[#230053]" id="totalVolume">0 MON</div>
-        <div class="text-xs text-green-500 mt-1" id="volumeChange">+0%</div>
+        <div
+          class="text-2xl font-bold text-[#230053]"
+          id="totalVolume"
+        >
+          0 MON
+        </div>
+        <!-- We'll dynamically add up/down caret + color -->
+        <div class="text-xs mt-1" id="volumeChange">+0%</div>
       </div>
+      <!-- Largest Transfer -->
       <div class="stat-card bg-white rounded-lg p-4 panel">
         <div class="text-sm text-gray-500 mb-1">Largest Transfer (3h)</div>
-        <div class="text-2xl font-bold text-[#230053]" id="largestTransfer">0 MON</div>
-        <div class="text-xs text-gray-500 mt-1" id="largestTimestamp">--</div>
+        <div
+          class="text-2xl font-bold text-[#230053]"
+          id="largestTransfer"
+        >
+          0 MON
+        </div>
+        <div
+          class="text-xs text-gray-500 mt-1"
+          id="largestTimestamp"
+        >
+          --
+        </div>
       </div>
+      <!-- Active Whale(s) -->
       <div class="stat-card bg-white rounded-lg p-4 panel">
         <div class="text-sm text-gray-500 mb-1">Active Whale(s)</div>
-        <div class="text-2xl font-bold text-[#230053]" id="activeWhale">0</div>
+        <div
+          class="text-2xl font-bold text-[#230053]"
+          id="activeWhale"
+        >
+          0
+        </div>
         <div class="text-xs text-gray-500 mt-1">Wallets with ≥2 tx (24h)</div>
       </div>
+      <!-- 24h Total Transactions -->
       <div class="stat-card bg-white rounded-lg p-4 panel">
         <div class="text-sm text-gray-500 mb-1">24h Total Transactions</div>
-        <div class="text-2xl font-bold text-[#230053]" id="txTotal">0</div>
-        <div class="text-xs text-red-500 mt-1" id="txChange">+0%</div>
+        <div
+          class="text-2xl font-bold text-[#230053]"
+          id="txTotal"
+        >
+          0
+        </div>
+        <!-- We'll dynamically add up/down caret + color -->
+        <div class="text-xs mt-1" id="txChange">+0%</div>
       </div>
     </div>
 
@@ -98,26 +199,77 @@
       <div class="panel">
         <div class="terminal-header text-white rounded-t-lg">
           <div class="terminal-bar">
-            <div class="terminal-circle" style="background-color: #ff5f56"></div>
-            <div class="terminal-circle" style="background-color: #ffbd2e"></div>
-            <div class="terminal-circle" style="background-color: #27c93f"></div>
+            <div
+              class="terminal-circle"
+              style="background-color: #ff5f56"
+            ></div>
+            <div
+              class="terminal-circle"
+              style="background-color: #ffbd2e"
+            ></div>
+            <div
+              class="terminal-circle"
+              style="background-color: #27c93f"
+            ></div>
             <div class="ml-2 font-bold">WhaleTransactions.exe</div>
           </div>
         </div>
         <div class="bg-white rounded-b-lg">
           <div class="p-3 bg-gray-100 border-b border-gray-200">
-            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
-              <div class="font-bold text-[#230053]">Whale Transactions</div>
-              <div class="flex flex-col sm:flex-row items-start sm:items-center gap-2 w-full sm:w-auto">
+            <div
+              class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2"
+            >
+              <div class="font-bold text-[#230053]">
+                Whale Transactions
+              </div>
+              <div
+                class="flex flex-col sm:flex-row items-start sm:items-center gap-2 w-full sm:w-auto"
+              >
                 <div class="relative w-full sm:w-64">
-                  <input type="search" id="searchInput" placeholder="Search transactions..." class="bg-white border border-gray-300 p-2 pl-8 rounded-full w-full" />
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400 absolute left-2 top-2.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                  <input
+                    type="search"
+                    id="searchInput"
+                    placeholder="Search transactions..."
+                    class="bg-white border border-gray-300 p-2 pl-8 rounded-full w-full"
+                  />
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-4 w-4 text-gray-400 absolute left-2 top-2.5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M21 21l-6-6m2-5a7 7 0
+                         11-14 0 7 7 0 0114 0z"
+                    />
                   </svg>
                 </div>
-                <button id="refreshButton" class="bg-[#230053] hover:bg-[#1e0049] text-white rounded-full px-4 py-2 w-full sm:w-auto flex items-center justify-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                <button
+                  id="refreshButton"
+                  class="bg-[#230053] hover:bg-[#1e0049] text-white rounded-full px-4 py-2 w-full sm:w-auto flex items-center justify-center"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-4 w-4 mr-1"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M4 4v5h.582m15.356
+                         2A8.001 8.001 0 004.582
+                         9m0 0H9m11 11v-5h-.581m0
+                         0a8.003 8.003 0
+                         01-15.357-2m15.357
+                         2H15"
+                    />
                   </svg>
                   Refresh
                 </button>
@@ -128,7 +280,9 @@
             <div class="min-w-[800px]">
               <table class="w-full">
                 <thead>
-                  <tr class="bg-gray-100 border-b border-gray-200 sticky top-0">
+                  <tr
+                    class="bg-gray-100 border-b border-gray-200 sticky top-0"
+                  >
                     <th class="p-3 text-left text-[#230053]">Amount</th>
                     <th class="p-3 text-left text-[#230053]">Sender Address</th>
                     <th class="p-3 text-left text-[#230053]">Receiver Address</th>
@@ -141,13 +295,34 @@
               </table>
             </div>
           </div>
-          <div class="p-3 bg-gray-100 border-t border-gray-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 rounded-b-lg">
+          <div
+            class="p-3 bg-gray-100 border-t border-gray-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 rounded-b-lg"
+          >
             <div>
-              <span id="txCount" class="font-bold text-[#230053]">0</span> transactions displayed
+              <span
+                id="txCount"
+                class="font-bold text-[#230053]"
+              >
+                0
+              </span>
+              transactions displayed
             </div>
             <div class="text-sm flex items-center text-gray-600">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4 mr-1"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 8v4l3 3m6-3a9 9 0
+                     11-18 0 9 9 0 0118
+                     0z"
+                />
               </svg>
               Auto-refreshes every 10 seconds
             </div>
@@ -155,27 +330,74 @@
         </div>
       </div>
     </div>
-    
+
     <!-- Donation Section -->
-    <div class="flex flex-col sm:flex-row justify-center items-center gap-3 mt-4 bg-white p-3 rounded-lg panel">
-      <button class="bg-[#230053] hover:bg-[#1e0049] text-white rounded-full px-4 py-2 flex items-center">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+    <div
+      class="flex flex-col sm:flex-row justify-center items-center gap-3 mt-4 bg-white p-3 rounded-lg panel"
+    >
+      <button
+        class="bg-[#230053] hover:bg-[#1e0049] text-white rounded-full px-4 py-2 flex items-center"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-4 w-4 mr-1"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M12 8c-1.657 0-3
+               .895-3 2s1.343 2 3 2 3
+               .895 3 2-1.343 2-3
+               2m0-8c1.11 0 2.08.402
+               2.599 1M12 8V7m0 1v8m0
+               0v1m0-1c-1.11 0-2.08-.402-2.599-1
+               M21 12a9 9 0 11-18
+               0 9 9 0 0118 0z"
+          />
         </svg>
         Donate to
       </button>
       <div class="flex items-center gap-2">
-        <div class="bg-gray-100 border border-gray-200 rounded-full p-2 px-4 text-sm break-all">
+        <div
+          class="bg-gray-100 border border-gray-200 rounded-full p-2 px-4 text-sm break-all"
+        >
           0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D
         </div>
-        <button class="bg-gray-100 hover:bg-gray-200 text-[#230053] border border-gray-200 rounded-full p-2" onclick="copyToClipboard('0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D')" title="Copy to clipboard">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+        <button
+          class="bg-gray-100 hover:bg-gray-200 text-[#230053] border border-gray-200 rounded-full p-2"
+          onclick="copyToClipboard('0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D')"
+          title="Copy to clipboard"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M8 5H6a2 2 0 00-2
+                 2v12a2 2 0 002 2h10a2
+                 2 0 002-2v-1M8 5a2
+                 2 0 002 2h2a2 2 0
+                 002-2M8 5a2 2 0
+                 012-2h2a2 2 0 012
+                 2m0 0h2a2 2 0 012
+                 2v3m2 4H10m0 0l3-3m-3
+                 3l3 3"
+            />
           </svg>
         </button>
       </div>
     </div>
-    
+
     <!-- Footer -->
     <footer class="mt-6 text-center text-white text-sm">
       <p>© 2025 Monad Whale Alert | All data from Monad blockchain</p>
@@ -185,99 +407,169 @@
   <!-- Supabase and Custom JS Code -->
   <script>
     const SUPABASE_URL = "https://pszbjeordtuypgmfglqb.supabase.co";
-    const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBzemJqZW9yZHR1eXBnbWZnbHFiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDIyOTczNTgsImV4cCI6MjA1Nzg3MzM1OH0.5pDR2Q98mrmPlIhRdHYEgz94mU7436vwo8gSh_zIf-M";
+    const SUPABASE_ANON_KEY =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBzemJqZW9yZHR1eXBnbWZnbHFiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDIyOTczNTgsImV4cCI6MjA1Nzg3MzM1OH0.5pDR2Q98mrmPlIhRdHYEgz94mU7436vwo8gSh_zIf-M" /* truncated for brevity */;
     const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-  
+
     // Helper function to truncate addresses
     function truncateAddress(address) {
-      if (!address) return '';
-      return address.length > 10 ? address.substring(0, 6) + '...' + address.substring(address.length - 4) : address;
+      if (!address) return "";
+      return address.length > 10
+        ? address.substring(0, 6) + "..." + address.substring(address.length - 4)
+        : address;
     }
-    
-    // Clipboard copy function
+
+    // Copy to clipboard
     function copyToClipboard(text) {
-      navigator.clipboard.writeText(text).then(() => {
-        const toast = document.createElement('div');
-        toast.className = 'fixed bottom-4 right-4 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg animate-fade-in';
-        toast.textContent = 'Copied to clipboard!';
-        document.body.appendChild(toast);
-        setTimeout(() => {
-          toast.style.opacity = '0';
-          toast.style.transition = 'opacity 300ms';
-          setTimeout(() => document.body.removeChild(toast), 300);
-        }, 2000);
-      }).catch(err => console.error('Copy failed:', err));
+      navigator.clipboard
+        .writeText(text)
+        .then(() => {
+          const toast = document.createElement("div");
+          toast.className =
+            "fixed bottom-4 right-4 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg animate-fade-in";
+          toast.textContent = "Copied to clipboard!";
+          document.body.appendChild(toast);
+          setTimeout(() => {
+            toast.style.opacity = "0";
+            toast.style.transition = "opacity 300ms";
+            setTimeout(() => document.body.removeChild(toast), 300);
+          }, 2000);
+        })
+        .catch((err) => console.error("Copy failed:", err));
     }
-    
-    // Function to update analytics based on historical data
+
+    // Up/Down caret icons (SVG)
+    const upCaret = `
+      <svg xmlns="http://www.w3.org/2000/svg" class="inline-block h-3 w-3 mr-1" viewBox="0 0 20 20" fill="currentColor">
+        <path fill-rule="evenodd" d="M5 12l5-5 5 5H5z" clip-rule="evenodd"/>
+      </svg>
+    `;
+    const downCaret = `
+      <svg xmlns="http://www.w3.org/2000/svg" class="inline-block h-3 w-3 mr-1" viewBox="0 0 20 20" fill="currentColor">
+        <path fill-rule="evenodd" d="M5 8l5 5 5-5H5z" clip-rule="evenodd"/>
+      </svg>
+    `;
+
+    // ======================
+    //  MAIN ANALYTICS LOGIC
+    // ======================
     async function updateAnalytics() {
       try {
         const now = new Date();
         const dayAgo = new Date(now.getTime() - 24 * 60 * 60 * 1000).toISOString();
         const prevDayAgo = new Date(now.getTime() - 48 * 60 * 60 * 1000).toISOString();
-  
-        // Query current 24h transfers (for volume and transaction count)
-        const { data: currentData, count: currentCount, error: currentError } = await supabase
-          .from('transfers')
-          .select('amount, from_addr', { count: 'exact' })
-          .gte('created_at', dayAgo);
-        if (currentError) throw currentError;
-  
+        const threeHoursAgo = new Date(now.getTime() - 3 * 60 * 60 * 1000).toISOString();
+
+        // 1) Current 24h data
+        let { data: currentData, count: currentCount } = await supabase
+          .from("transfers")
+          .select("amount, from_addr", { count: "exact" })
+          .gte("created_at", dayAgo);
+
         let currentVolume = 0;
-        let senderCounts = {};
+        const senderCounts = {};
         if (currentData) {
-          currentData.forEach(tx => {
+          currentData.forEach((tx) => {
             currentVolume += parseFloat(tx.amount);
-            const sender = tx.from_addr;
-            senderCounts[sender] = (senderCounts[sender] || 0) + 1;
+            senderCounts[tx.from_addr] = (senderCounts[tx.from_addr] || 0) + 1;
           });
         }
-  
-        // Query previous 24h transfers (for comparison)
-        const { data: previousData, count: previousCount, error: previousError } = await supabase
-          .from('transfers')
-          .select('amount', { count: 'exact' })
-          .gte('created_at', prevDayAgo)
-          .lt('created_at', dayAgo);
-        if (previousError) throw previousError;
-  
+        const txCountCurrent = currentCount || 0;
+
+        // 2) Previous 24h data
+        let { data: prevData, count: prevCount } = await supabase
+          .from("transfers")
+          .select("amount", { count: "exact" })
+          .gte("created_at", prevDayAgo)
+          .lt("created_at", dayAgo);
+
         let previousVolume = 0;
-        if (previousData) {
-          previousData.forEach(tx => {
+        if (prevData) {
+          prevData.forEach((tx) => {
             previousVolume += parseFloat(tx.amount);
           });
         }
-  
-        // Calculate percentage change for volume
-        const volumeChangePercent = previousVolume > 0 
-          ? (((currentVolume - previousVolume) / previousVolume) * 100).toFixed(2)
-          : "0.00";
-  
-        // Total transaction counts for current and previous 24h periods
-        const txCountCurrent = currentCount || 0;
-        const txCountPrevious = previousCount || 0;
-        const txChangePercent = txCountPrevious > 0 
-          ? (((txCountCurrent - txCountPrevious) / txCountPrevious) * 100).toFixed(2)
-          : "0.00";
-  
-        // Calculate Active Whales: count of unique sender addresses with ≥2 transactions in current 24h
-        let activeWhaleCount = 0;
-        for (const sender in senderCounts) {
-          if (senderCounts[sender] >= 2) activeWhaleCount++;
+        const txCountPrevious = prevCount || 0;
+
+        // 3) Largest transfer in last 3 hours
+        let { data: largestData, error: largestErr } = await supabase
+          .from("transfers")
+          .select("amount, created_at")
+          .gte("created_at", threeHoursAgo)
+          .order("amount", { ascending: false })
+          .limit(1);
+        let largestAmount = 0;
+        let largestTimestamp = "--";
+        if (largestData && largestData.length > 0) {
+          largestAmount = parseFloat(largestData[0].amount);
+          largestTimestamp = largestData[0].created_at; // raw ISO date
         }
-  
-        // Update the DOM elements for analytics cards
-        document.getElementById('totalVolume').textContent = `${currentVolume.toLocaleString()} MON`;
-        document.getElementById('volumeChange').textContent = `${volumeChangePercent > 0 ? '+' : ''}${volumeChangePercent}%`;
-        document.getElementById('txTotal').textContent = `${txCountCurrent}`;
-        document.getElementById('txChange').textContent = `${txChangePercent > 0 ? '+' : ''}${txChangePercent}%`;
-        document.getElementById('activeWhale').textContent = activeWhaleCount;
+
+        // 4) Active Whales: # of unique addresses with ≥2 tx in the current 24h
+        let activeWhaleCount = 0;
+        Object.keys(senderCounts).forEach((addr) => {
+          if (senderCounts[addr] >= 4) activeWhaleCount++;
+        });
+
+        // 5) Percentage changes
+        const volumeChangePercent =
+          previousVolume > 0
+            ? (((currentVolume - previousVolume) / previousVolume) * 100).toFixed(2)
+            : "0.00";
+        const txChangePercent =
+          txCountPrevious > 0
+            ? (((txCountCurrent - txCountPrevious) / txCountPrevious) * 100).toFixed(2)
+            : "0.00";
+
+        // 6) Update DOM
+        // 24h Volume
+        const volumeEl = document.getElementById("totalVolume");
+        volumeEl.textContent = `${currentVolume.toLocaleString()} MON`;
+
+        const volumeChangeEl = document.getElementById("volumeChange");
+        const volVal = parseFloat(volumeChangePercent);
+        if (volVal > 0) {
+          volumeChangeEl.className = "text-xs text-green-500 mt-1";
+          volumeChangeEl.innerHTML = upCaret + `+${volVal}%`;
+        } else if (volVal < 0) {
+          volumeChangeEl.className = "text-xs text-red-500 mt-1";
+          volumeChangeEl.innerHTML = downCaret + `${volVal}%`;
+        } else {
+          // zero or no previous data
+          volumeChangeEl.className = "text-xs text-gray-500 mt-1";
+          volumeChangeEl.textContent = "+0%";
+        }
+
+        // Largest Transfer (3h)
+        document.getElementById("largestTransfer").textContent =
+          `${largestAmount.toLocaleString()} MON`;
+        document.getElementById("largestTimestamp").textContent = largestTimestamp;
+
+        // Active Whale(s)
+        document.getElementById("activeWhale").textContent = activeWhaleCount;
+
+        // 24h Transactions
+        const txTotalEl = document.getElementById("txTotal");
+        txTotalEl.textContent = txCountCurrent;
+
+        const txChangeEl = document.getElementById("txChange");
+        const txVal = parseFloat(txChangePercent);
+        if (txVal > 0) {
+          txChangeEl.className = "text-xs text-green-500 mt-1";
+          txChangeEl.innerHTML = upCaret + `+${txVal}%`;
+        } else if (txVal < 0) {
+          txChangeEl.className = "text-xs text-red-500 mt-1";
+          txChangeEl.innerHTML = downCaret + `${txVal}%`;
+        } else {
+          txChangeEl.className = "text-xs text-gray-500 mt-1";
+          txChangeEl.textContent = "+0%";
+        }
       } catch (err) {
         console.error("Error updating analytics:", err);
       }
     }
-    
-    // Function to fetch recent transactions for the table
+
+    // Fetch the last 8 transactions (descending by created_at)
     async function fetchTransactions() {
       try {
         const { data, error } = await supabase
@@ -289,89 +581,112 @@
         const tbody = document.getElementById("transactionsTable");
         tbody.innerHTML = "";
         if (data && data.length > 0) {
-          // Reverse to display oldest first
-          data.reverse().forEach(tx => renderTransaction(tx));
-          console.log('Fetched transactions:', data);
+          // Reverse so oldest is at the bottom
+          data.reverse().forEach((tx) => renderTransaction(tx));
+          console.log("Fetched transactions:", data);
         } else {
-          console.log('No transactions found');
+          console.log("No transactions found");
         }
       } catch (err) {
         console.error("Error fetching transactions:", err);
       }
     }
-    
-    // Function to render a transaction row in the table
+
+    // Render a single transaction row
     function renderTransaction(tx) {
       const tbody = document.getElementById("transactionsTable");
       const tr = document.createElement("tr");
       tr.className = "border-b border-gray-100 hover:bg-blue-50 animate-fade-in";
-      
+
       const amount = parseFloat(tx.amount).toFixed(2);
       const txHash = tx.tx_hash.startsWith("0x") ? tx.tx_hash : "0x" + tx.tx_hash;
       const explorerUrl = `https://testnet.monadexplorer.com/tx/${txHash}`;
-      
+
       tr.innerHTML = `
         <td class="p-3">
           <div class="bg-[#f3e6f9] text-[#230053] p-2 rounded-full text-center font-bold">
             ${amount} MON
           </div>
         </td>
-        <td class="p-3 text-sm" onclick="copyToClipboard('${tx.from_addr}')" style="cursor: pointer" title="Click to copy: ${tx.from_addr}">
+        <td class="p-3 text-sm"
+            onclick="copyToClipboard('${tx.from_addr}')"
+            style="cursor: pointer"
+            title="Click to copy: ${tx.from_addr}">
           ${truncateAddress(tx.from_addr)}
         </td>
-        <td class="p-3 text-sm" onclick="copyToClipboard('${tx.to_addr}')" style="cursor: pointer" title="Click to copy: ${tx.to_addr}">
+        <td class="p-3 text-sm"
+            onclick="copyToClipboard('${tx.to_addr}')"
+            style="cursor: pointer"
+            title="Click to copy: ${tx.to_addr}">
           ${truncateAddress(tx.to_addr)}
         </td>
         <td class="p-3 text-sm flex items-center gap-2">
-          <span onclick="copyToClipboard('${txHash}')" style="cursor: pointer" title="Click to copy: ${txHash}">
+          <span onclick="copyToClipboard('${txHash}')"
+                style="cursor: pointer"
+                title="Click to copy: ${txHash}">
             ${truncateAddress(txHash)}
           </span>
-          <a href="${explorerUrl}" target="_blank" rel="noopener noreferrer" class="link-icon" title="View on Monad Explorer">
-            <svg class="h-5 w-5 bg-[#f3e6f9] text-[#230053] rounded-full p-0.5 hover:bg-[#f0dff6]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-              <polyline points="15 3 21 3 21 9"></polyline>
-              <line x1="10" y1="14" x2="21" y2="3"></line>
+          <a href="${explorerUrl}"
+             target="_blank"
+             rel="noopener noreferrer"
+             class="link-icon"
+             title="View on Monad Explorer">
+            <svg class="h-5 w-5 bg-[#f3e6f9] text-[#230053] rounded-full p-0.5 hover:bg-[#f0dff6]"
+                 viewBox="0 0 24 24"
+                 fill="none"
+                 stroke="currentColor"
+                 stroke-width="2"
+                 stroke-linecap="round"
+                 stroke-linejoin="round">
+              <path d="M18 13v6a2 2 0
+                       0 1-2 2H5a2 2 0
+                       0 1-2-2V8a2 2 0
+                       0 1 2-2h6"/>
+              <polyline points="15 3 21 3 21 9"/>
+              <line x1="10" y1="14" x2="21" y2="3"/>
             </svg>
           </a>
         </td>
       `;
-      
+
       tbody.insertBefore(tr, tbody.firstChild);
       if (tbody.children.length > 8) {
         tbody.removeChild(tbody.lastChild);
       }
-      document.getElementById('txCount').textContent = tbody.children.length;
+      document.getElementById("txCount").textContent = tbody.children.length;
     }
-    
-    // Periodically fetch transactions and update analytics every 10 seconds.
+
+    // Poll every 10s
     setInterval(() => {
       fetchTransactions();
       updateAnalytics();
     }, 10000);
-    
+
     document.addEventListener("DOMContentLoaded", () => {
       fetchTransactions();
       updateAnalytics();
     });
-    
-    // Search functionality for filtering transactions.
-    const searchInput = document.querySelector('input[type="search"]');
+
+    // Search
+    const searchInput = document.querySelector("#searchInput");
     searchInput.addEventListener("input", (e) => {
       const query = e.target.value.toLowerCase();
-      document.querySelectorAll("tbody tr").forEach(row => {
-        row.style.display = row.textContent.toLowerCase().includes(query) ? "" : "none";
+      document.querySelectorAll("#transactionsTable tr").forEach((row) => {
+        row.style.display = row.textContent.toLowerCase().includes(query)
+          ? ""
+          : "none";
       });
     });
-    
-    // Mobile menu toggle.
+
+    // Mobile menu toggle
     let menuOpen = false;
     function toggleMenu() {
       menuOpen = !menuOpen;
       const menu = document.getElementById("mobileMenu");
       menu.classList.toggle("hidden", !menuOpen);
     }
-    
-    // Refresh button event.
+
+    // Refresh button
     document.getElementById("refreshButton").addEventListener("click", () => {
       fetchTransactions();
       updateAnalytics();
